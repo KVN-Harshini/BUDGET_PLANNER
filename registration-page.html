@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Budget Planner - Registration</title>
+
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #071821;
+    color: #EAFBF5;
+}
+
+
+/* ================= CONTAINER ================= */
+
+.register-container {
+    width: 1100px;
+    min-height: 700px;
+
+    display: flex;
+
+    background: #102A32;
+
+    border-radius: 22px;
+    overflow: hidden;
+
+    border: 1px solid rgba(110, 231, 200, 0.15);
+}
+
+
+/* ================= LEFT SECTION ================= */
+
+.left-section {
+    width: 52%;
+    padding: 38px 48px;
+
+    position: relative;
+
+    background:
+        radial-gradient(
+            circle at 40% 35%,
+            rgba(30, 155, 131, 0.20),
+            transparent 45%
+        ),
+        #0A2028;
+}
+
+
+/* ================= LOGO ================= */
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo {
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+}
+
+.logo-section h2 {
+    font-size: 26px;
+    color: #F2FFFB;
+    line-height: 1;
+}
+
+.logo-section h2 span {
+    color: #1E9B83;
+
+    font-size: inherit;
+    font-weight: inherit;
+    display: inline;
+
+}
+
+
+/* ================= TOP LOGIN ================= */
+
+.top-link {
+    position: absolute;
+
+    top: 42px;
+    right: 38px;
+
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.top-link p {
+    color: #91AAA9;
+    font-size: 13px;
+}
+
+.top-link a {
+    text-decoration: none;
+
+    color: #6EE7C8;
+
+    border: 1px solid #1E9B83;
+
+    padding: 9px 20px;
+
+    border-radius: 9px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+.top-link a:hover {
+    background: #1E9B83;
+    color: white;
+
+}
+
+
+/* ================= INTRO ================= */
+
+.intro {
+    margin-top: 105px;
+    margin-left: 5px;
+}
+
+.small-text {
+    color: #6EE7C8;
+
+    font-size: 19px;
+    font-style: italic;
+
+    margin-bottom: 28px;
+}
+
+.intro h1 {
+    color: #F2FFFB;
+
+    font-size: 40px;
+    line-height: 1.15;
+
+    margin-bottom: 22px;
+
+    max-width: 430px;
+}
+
+.intro h1 span {
+    color: #1E9B83;
+
+    font-size: inherit;
+    font-weight: inherit;
+
+    display: inline;
+
+}
+
+.intro-description {
+    color: #A9C1C0;
+
+    font-size: 16px;
+    line-height: 1.8;
+
+    width: 420px;
+
+    margin-bottom: 10px;
+}
+
+
+/* ================= IMAGE ================= */
+
+.register-image {
+    width: 330px;
+    height: 330px;
+
+    object-fit: cover;
+
+    display: block;
+
+    margin: 18px auto 0;
+
+    border-radius: 20px;
+}
+
+
+/* ================= RIGHT SECTION ================= */
+
+.right-section {
+    width: 48%;
+
+    padding: 45px 42px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background: #071821;
+}
+
+
+/* ================= FORM BOX ================= */
+
+.form-box {
+    width: 100%;
+    max-width: 470px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #102A32,
+            #0A2028
+        );
+
+    padding: 38px;
+
+    border-radius: 16px;
+
+    border: 1px solid rgba(30, 155, 131, 0.25);
+}
+
+
+/* ================= FORM HEADING ================= */
+
+.form-box h2 {
+    font-size: 30px;
+
+    color: #F2FFFB;
+
+    margin-bottom: 7px;
+}
+
+.form-box .subtitle {
+    color: #91AAA9;
+
+    font-size: 14px;
+
+    margin-bottom: 27px;
+}
+
+
+/* ================= FORM ================= */
+
+form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+/* ================= INPUT ================= */
+
+input {
+    width: 100%;
+    height: 52px;
+
+    padding: 12px 16px;
+
+    border: 1px solid #31504F;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    font-size: 14px;
+
+    color: #EAFBF5;
+
+    background: #071821;
+
+    transition: 0.3s;
+}
+
+input::placeholder {
+    color: #718C8A;
+}
+
+input:focus {
+    border-color: #6EE7C8;
+}
+
+
+/* ================= ERROR ================= */
+
+span {
+    color: #ff6b6b;
+
+    font-size: 11px;
+
+    min-height: 13px;
+
+    display: flex;
+
+    justify-content: center;
+}
+
+
+/* ================= REGISTER BUTTON ================= */
+
+.register-btn {
+    width: 100%;
+    height: 52px;
+
+    margin-top: 8px;
+
+    border: 1px solid #1E9B83;
+
+    border-radius: 9px;
+
+    background-color: #1E9B83;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.register-btn:hover {
+    background-color: #157A68;
+
+    border-color: #6EE7C8;
+
+    transform: translateY(-2px);
+}
+
+
+/* ================= TERMS ================= */
+
+.terms {
+    text-align: center;
+
+    color: #718C8A;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    margin-top: 22px;
+}
+
+.terms a {
+    color: #6EE7C8;
+
+    text-decoration: none;
+}
+
+.terms a:hover {
+    color: #A9E5D1;
+
+    text-decoration: underline;
+}
+
+
+/* ================= LOGIN LINK ================= */
+
+.login-text {
+    text-align: center;
+
+    margin-top: 18px;
+
+    font-size:15px;
+
+    color: #91AAA9;
+}
+
+.login-text a {
+    color: #6EE7C8;
+
+    text-decoration: none;
+
+    font-weight: 600;
+}
+
+.login-text a:hover {
+    color: #A9E5D1;
+
+    text-decoration: underline;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+
+    .register-container {
+        width: 92%;
+        flex-direction: column;
+    }
+
+    .left-section,
+    .right-section {
+        width: 100%;
+    }
+
+    .left-section {
+        padding: 35px;
+
+        border-right: none;
+
+        border-bottom: 1px solid rgba(110, 231, 200, 0.12);
+    }
+
+    .right-section {
+        padding: 35px;
+    }
+
+    .intro {
+        margin-top: 80px;
+    }
+
+    .intro-description {
+        width: 100%;
+    }
+
+    .register-image {
+        width: 280px;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .register-container {
+        width: 95%;
+
+        border-radius: 15px;
+    }
+
+    .left-section {
+        padding: 25px;
+    }
+
+    .top-link {
+        position: static;
+
+        margin-top: 20px;
+    }
+
+    .intro {
+        margin-top: 50px;
+    }
+
+    .intro h1 {
+        font-size: 32px;
+    }
+
+    .form-box {
+        padding: 25px;
+    }
+
+    .form-box h2 {
+        font-size: 25px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="register-container">
+
+
+    <!-- LEFT SECTION -->
+
+    <div class="left-section">
+
+
+        <div class="logo-section">
+
+            <img
+                src="logo.png"
+                alt="Budget Planner Logo"
+                class="logo"
+            >
+
+            <h2>
+                Budget <span>Planner</span>
+            </h2>
+
+        </div>
+
+        <div class="intro">
+
+
+            <p class="small-text">
+                Start Your Journey
+            </p>
+
+
+            <h1>
+                Build a Better<br>
+                Financial <span>Future</span>
+            </h1>
+
+
+            <p class="intro-description">
+                “Create your account and take the first step
+                towards better money management, savings
+                and financial freedom.”
+            </p>
+
+
+            <img
+                src="loginpage-img.png"
+                alt="Managing finances"
+                class="register-image"
+            >
+
+
+        </div>
+
+
+    </div>
+
+
+    <!-- RIGHT SECTION -->
+
+    <div class="right-section">
+
+
+        <div class="form-box">
+
+
+            <h2>
+                Create Your Account
+            </h2>
+
+
+            <p class="subtitle">
+                Fill in your details to get started.
+            </p>
+
+
+            <form onsubmit="return validateform();">
+
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your full name"
+                >
+
+                <span id="nameError"></span>
+
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                >
+
+                <span id="emailError"></span>
+
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                >
+
+                <span id="passwordError"></span>
+
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Confirm your password"
+                >
+
+                <span id="confirmPasswordError"></span>
+
+
+                <button
+                    type="submit"
+                    class="register-btn"
+                >
+                    Register →
+                </button>
+
+
+            </form>
+
+
+            <p class="terms">
+
+                By creating an account, you agree to our<br>
+
+                <a href="#">
+                    Terms of Service
+                </a>
+
+                &nbsp; — &nbsp;
+
+                <a href="#">
+                    Privacy Policy
+                </a>
+
+            </p>
+
+
+            <p class="login-text">
+
+                Already have an account?
+
+                <a href="login-page.html">
+                    Login
+                </a>
+
+            </p>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+
+function validateform() {
+
+
+    let name =
+        document.getElementById("name").value.trim();
+
+
+    let email =
+        document.getElementById("email").value.trim();
+
+
+    let password =
+        document.getElementById("password").value.trim();
+
+
+    let confirmPassword =
+        document.getElementById("confirmPassword").value.trim();
+
+
+    let nameError =
+        document.getElementById("nameError");
+
+
+    let emailError =
+        document.getElementById("emailError");
+
+
+    let passwordError =
+        document.getElementById("passwordError");
+
+
+    let confirmPasswordError =
+        document.getElementById("confirmPasswordError");
+
+
+    let valid = true;
+
+
+    if (name === "") {
+
+        nameError.innerHTML =
+            "Name is required";
+
+        valid = false;
+
+    }
+
+    else {
+
+        nameError.innerHTML = "";
+
+    }
+
+
+    if (email === "") {
+
+        emailError.innerHTML =
+            "Email is required";
+
+        valid = false;
+
+    }
+
+    else {
+
+        emailError.innerHTML = "";
+
+    }
+
+
+    if (password === "") {
+
+        passwordError.innerHTML =
+            "Password is required";
+
+        valid = false;
+
+    }
+
+    else if (password.length < 8) {
+
+        passwordError.innerHTML =
+            "Password should have min 8 characters";
+
+        valid = false;
+
+    }
+
+    else if (!password.match(/[0-9]/)) {
+
+        passwordError.innerHTML =
+            "Password should contain atleast one number";
+
+        valid = false;
+
+    }
+
+    else {
+
+        passwordError.innerHTML = "";
+
+    }
+
+
+    if (confirmPassword === "") {
+
+        confirmPasswordError.innerHTML =
+            "Please confirm your password";
+
+        valid = false;
+
+    }
+
+    else if (password !== confirmPassword) {
+
+        confirmPasswordError.innerHTML =
+            "Passwords do not match";
+
+        valid = false;
+
+    }
+
+    else {
+
+        confirmPasswordError.innerHTML = "";
+
+    }
+
+
+    if (!valid) {
+
+        return false;
+
+    }
+
+
+    let user = {
+
+        name: name,
+
+        email: email,
+
+        password: password
+
+    };
+
+
+    localStorage.setItem(
+        "user",
+        JSON.stringify(user)
+    );
+
+
+    alert("Registration Successful!");
+
+
+    window.location.href =
+        "login-page.html";
+
+
+    return false;
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

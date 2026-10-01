@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Budget Planner - Login</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #071821;
+    color: #EAFBF5;
+}
+
+
+/* ================= LOGIN CONTAINER ================= */
+
+.login-container {
+    width: 900px;
+    min-height: 550px;
+    display: flex;
+    background: #102A32;
+    border-radius: 20px;
+    overflow: hidden;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.45),
+        0 0 30px rgba(30, 155, 131, 0.10);
+
+    border: 1px solid rgba(110, 231, 200, 0.15);
+}
+
+
+/* ================= LEFT SECTION ================= */
+
+.left-section {
+    width: 50%;
+    padding: 50px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle at 50% 30%,
+            rgba(30, 155, 131, 0.20),
+            transparent 45%
+        ),
+        #0A2028;
+
+}
+
+
+/* ================= LOGO ================= */
+
+.logo {
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+    margin-bottom: 18px;
+    border-radius: 40px;
+}
+
+
+/* ================= LEFT TEXT ================= */
+
+.left-section h1 {
+    font-size: 30px;
+    color: #F2FFFB;
+    margin-bottom: 15px;
+}
+
+.left-section h1 span {
+    font-size: inherit;
+    font-weight: inherit;
+    display: inline;
+    color: #1E9B83;
+}
+
+
+.left-section p {
+    color: #A9C1C0;
+    font-size: 15px;
+    line-height: 1.7;
+
+    max-width: 350px;
+    margin-bottom: 20px;
+}
+
+
+/* ================= TAGLINE ================= */
+
+.tagline {
+    color: #6EE7C8 !important;
+
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 17px !important;
+
+    margin-bottom: 18px !important;
+}
+
+
+/* ================= LOGIN IMAGE ================= */
+
+.login-image {
+    border-radius: 40px;
+    height: 330px;
+    width: 330px;
+    object-fit: cover;
+    margin-top: 10px;
+
+    
+}
+
+
+/* ================= RIGHT SECTION ================= */
+
+.right-section {
+    width: 50%;
+    padding: 50px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background: #102A32;
+}
+
+
+/* ================= LOGIN HEADING ================= */
+
+.right-section h2 {
+    font-size: 40px;
+
+    color: #F2FFFB;
+
+    margin-bottom: 8px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.welcome-text {
+    color: #91AAA9;
+
+    font-size: 14px;
+
+    margin-bottom: 30px;
+
+    text-align: center;
+}
+
+
+/* ================= FORM ================= */
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+
+/* ================= INPUT ================= */
+
+input {
+    width: 100%;
+    height: 48px;
+
+    padding: 12px 15px;
+
+    border: 1px solid #31504F;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    font-size: 14px;
+
+    color: #EAFBF5;
+
+    background: #071821;
+
+    transition: 0.3s;
+}
+
+
+input::placeholder {
+    color: #718C8A;
+}
+
+
+input:focus {
+    border-color: #6EE7C8;
+
+    box-shadow:
+        0 0 0 3px rgba(110, 231, 200, 0.10),
+        0 0 15px rgba(30, 155, 131, 0.12);
+}
+
+
+/* ================= ERROR ================= */
+
+span {
+    color: #ff6b6b;
+
+    font-size: 14px;
+
+    min-height: 15px;
+
+    display: flex;
+    justify-content: center;
+}
+
+
+/* ================= LOGIN BUTTON ================= */
+
+button {
+    width: 100%;
+    height: 48px;
+    margin-top: 15px;
+    border: 1px solid #1E9B83;
+    border-radius: 8px;
+    background-color: #1E9B83;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+
+button:hover {
+    background-color: #157A68;
+
+    border-color: #6EE7C8;
+
+    transform: translateY(-2px);
+
+}
+
+
+/* ================= SIGN UP ================= */
+
+.signup-text {
+    text-align: center;
+
+    margin-top: 22px;
+
+    font-size: 14px;
+
+    color: #91AAA9;
+}
+
+
+.signup-text a {
+    color: #6EE7C8;
+
+    text-decoration: none;
+
+    font-weight: 600;
+}
+
+
+.signup-text a:hover {
+    color: #A9E5D1;
+
+    text-decoration: underline;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 750px) {
+
+    .login-container {
+        width: 90%;
+        flex-direction: column;
+    }
+
+    .left-section,
+    .right-section {
+        width: 100%;
+    }
+
+    .left-section {
+        padding: 35px 25px;
+
+        border-right: none;
+
+        border-bottom: 1px solid rgba(110, 231, 200, 0.12);
+    }
+
+    .right-section {
+        padding: 35px 25px;
+    }
+
+    .login-image {
+        width: 170px;
+    }
+}
+
+
+@media (max-width: 450px) {
+
+    .login-container {
+        width: 95%;
+
+        border-radius: 15px;
+    }
+
+    .left-section h1 {
+        font-size: 26px;
+    }
+
+    .right-section h2 {
+        font-size: 27px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+<div class="login-container">
+
+    <div class="left-section">
+
+        <img
+            src="logo.png"
+            alt="Budget Planner Logo"
+            class="logo"
+        >
+
+        <h1>
+            Welcome to Back
+            <span>Budget Planner</span>
+        </h1>
+
+        <p class="tagline">
+            PLAN • TRACK • GROW
+        </p>
+
+        <p>
+            Manage your income, track your expenses,
+            set budgets and savings goals, and understand
+            your spending — all in one place.
+        </p>
+
+        <img
+            src="loginpage-img.png"
+            alt="Managing finances"
+            class="login-image"
+        >
+
+    </div>
+
+
+    <div class="right-section">
+
+        <h2>
+            Login
+        </h2>
+
+        <p class="welcome-text">
+            Login to continue managing your finances.
+        </p>
+
+
+        <form onsubmit="return validateform();">
+
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+            >
+
+            <span id="emailError"></span>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+            >
+
+            <span id="passwordError"></span>
+
+
+            <button type="submit">
+                Login
+            </button>
+
+        </form>
+
+
+        <p class="signup-text">
+
+            Don't have an account?
+
+            <a href="registration-page.html">
+                Sign Up
+            </a>
+
+        </p>
+
+    </div>
+
+</div>
+
+<script>
+
+function validateform() {
+
+    let email = document.getElementById("email").value.trim();
+    let password = document.getElementById("password").value.trim();
+
+    let emailError = document.getElementById("emailError");
+    let passwordError = document.getElementById("passwordError");
+
+    let valid = true;
+
+    if (email === "") {
+
+        emailError.innerHTML = "Email is required";
+        valid = false;
+
+    } else {
+
+        emailError.innerHTML = "";
+
+    }
+
+    if (password === "") {
+
+        passwordError.innerHTML = "Password is required";
+        valid = false;
+
+    }
+
+    else if (password.length < 8) {
+
+        passwordError.innerHTML =
+            "Password should have min 8 characters";
+
+        valid = false;
+
+    }
+
+    else if (!password.match(/[0-9]/)) {
+
+        passwordError.innerHTML =
+            "Password should contain atleast one number";
+
+        valid = false;
+
+    }
+
+    else {
+
+        passwordError.innerHTML = "";
+
+    }
+
+    if (!valid) {
+
+        return false;
+
+    }
+
+    let storedUser = localStorage.getItem("user");
+
+
+    if (storedUser === null) {
+
+        alert("No registered user found. Please register first.");
+
+        return false;
+
+    }
+
+
+    let user = JSON.parse(storedUser);
+    if (email === user.email && password === user.password) {
+
+        alert("Login successfully!");
+
+        window.location.href = "dashboard.html";
+
+    }
+
+    else {
+        passwordError.innerHTML =
+            "Invalid email or password";
+    }
+    return false;
+
+}
+
+</script>
+
+</body>
+
+</html>

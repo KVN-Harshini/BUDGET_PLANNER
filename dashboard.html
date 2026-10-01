@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Planner - Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: #071821;
+            color: #fff;
+        }
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: #102A32;
+            border-right: 1px solid rgba(169,229,209,0.12);
+            padding: 20px 15px;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 10px 20px;
+            border-bottom: 1px solid rgba(169,229,209,0.12);
+            margin-bottom: 15px;
+        }
+        .logo-section img {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+        }
+        .logo-section h2 {
+            font-size: 18px;
+            color: #6EE7C8;
+        }
+        .nav-item {
+            margin-bottom: 5px;
+        }
+        .nav-link {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            border: none;
+            background: transparent;
+            color: #A9C1C0;
+            text-decoration: none;
+            font-size: 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .nav-link:hover,
+        .nav-link.active {
+            background: #1E9B83;
+            color: #fff;
+        }
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .arrow {
+            font-size: 11px;
+            transition: 0.3s;
+        }
+        .nav-item.open .arrow {
+            transform: rotate(180deg);
+        }
+        .dropdown {
+            display: none;
+            padding-left: 15px;
+        }
+        .nav-item.open .dropdown {
+            display: block;
+        }
+        .dropdown a {
+            display: block;
+            padding: 9px 12px;
+            color: #91AAA9;
+            text-decoration: none;
+            font-size: 13px;
+            border-radius: 6px;
+        }
+        .dropdown a:hover {
+            color: #6EE7C8;
+            background: rgba(30,155,131,0.12);
+        }
+        .logout {
+            margin-top: 15px;
+            border-top: 1px solid rgba(169,229,209,0.12);
+            padding-top: 15px;
+        }
+        .main {
+            margin-left: 250px;
+            min-height: 100vh;
+            padding: 18px 25px;
+        }
+        .topbar {
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+        .mobile-menu {
+            display: none;
+            border: none;
+            background: #102A32;
+            color: #6EE7C8;
+            font-size: 24px;
+            padding: 7px 11px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .top-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .notification {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #102A32;
+            border-radius: 50%;
+            color: #6EE7C8;
+            cursor: pointer;
+        }
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            background: #102A32;
+            padding: 6px 12px 6px 6px;
+            border-radius: 25px;
+        }
+        .profile-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #1E9B83;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #fff;
+        }
+        .profile span {
+            color: #A9C1C0;
+            font-size: 13px;
+        }
+        .welcome {
+            margin-bottom: 18px;
+        }
+        .welcome h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        .welcome h1 span {
+            color: #6EE7C8;
+        }
+        .welcome p {
+            color: #91AAA9;
+            font-size: 14px;
+        }
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        .summary-card {
+            background: #102A32;
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(169,229,209,0.1);
+        }
+        .summary-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .summary-title {
+            color: #91AAA9;
+            font-size: 13px;
+        }
+        .summary-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(30,155,131,0.15);
+            border-radius: 8px;
+        }
+        .summary-card h2 {
+            font-size: 23px;
+            margin-bottom: 4px;
+        }
+        .summary-card p {
+            color: #6EE7C8;
+            font-size: 12px;
+        }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .dashboard-card {
+            background: #102A32;
+            padding: 18px;
+            border-radius: 12px;
+            border: 1px solid rgba(169,229,209,0.1);
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+        .card-header h3 {
+            font-size: 16px;
+        }
+        .card-header a {
+            color: #6EE7C8;
+            text-decoration: none;
+            font-size: 12px;
+        }
+        .budget-amount {
+            display: flex;
+            align-items: baseline;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        .budget-amount strong {
+            font-size: 25px;
+        }
+        .budget-amount span {
+            color: #91AAA9;
+            font-size: 13px;
+        }
+        .progress {
+            width: 100%;
+            height: 9px;
+            background: #071821;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 9px;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 63%;
+            background: #1E9B83;
+            border-radius: 10px;
+        }
+        .budget-info {
+            display: flex;
+            justify-content: space-between;
+            color: #91AAA9;
+            font-size: 12px;
+        }
+        .goal {
+            margin-bottom: 14px;
+        }
+        .goal:last-child {
+            margin-bottom: 0;
+        }
+        .goal-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+        .goal-top span {
+            font-size: 13px;
+            color: #A9C1C0;
+        }
+        .goal-top strong {
+            color: #6EE7C8;
+            font-size: 12px;
+        }
+        .goal-progress {
+            height: 7px;
+            background: #071821;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .goal-bar {
+            height: 100%;
+            background: #6EE7C8;
+            border-radius: 10px;
+        }
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .pie-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+        }
+        .pie-chart {
+            width: 155px;
+            height: 155px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #1E9B83 0deg 76deg,
+                #6EE7C8 76deg 120deg,
+                #4DB6AC 120deg 183deg,
+                #2F7F73 183deg 234deg,
+                #9BDCCB 234deg 310deg,
+                #456C68 310deg 360deg
+            );
+            position: relative;
+            flex-shrink: 0;
+        }
+        .pie-chart::after {
+            content: "";
+            position: absolute;
+            width: 75px;
+            height: 75px;
+            background: #102A32;
+            border-radius: 50%;
+            top: 40px;
+            left: 40px;
+        }
+        .pie-center {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+        .pie-center strong {
+            font-size: 17px;
+        }
+        .pie-center span {
+            color: #91AAA9;
+            font-size: 10px;
+        }
+        .legend {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            color: #A9C1C0;
+            font-size: 12px;
+        }
+        .dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+        }
+        .dot-food {
+            background: #1E9B83;
+        }
+        .dot-transport {
+            background: #6EE7C8;
+        }
+        .dot-shopping {
+            background: #4DB6AC;
+        }
+        .dot-education {
+            background: #2F7F73;
+        }
+        .dot-bills {
+            background: #9BDCCB;
+        }
+        .dot-other {
+            background: #456C68;
+        }
+        .transaction {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(169,229,209,0.08);
+        }
+        .transaction:last-child {
+            border-bottom: none;
+        }
+        .transaction-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .transaction-icon {
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background: rgba(30,155,131,0.12);
+        }
+        .transaction-name {
+            font-size: 13px;
+        }
+        .transaction-date {
+            color: #91AAA9;
+            font-size: 11px;
+            margin-top: 3px;
+        }
+        .expense {
+            color: #ff8f8f;
+            font-size: 13px;
+        }
+        .income {
+            color: #6EE7C8;
+            font-size: 13px;
+        }
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            gap: 10px;
+        }
+        .action-btn {
+            padding: 13px 10px;
+            border: 1px solid rgba(169,229,209,0.1);
+            background: #071821;
+            color: #A9C1C0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: 0.3s;
+        }
+        .action-btn:hover {
+            background: #1E9B83;
+            color: #fff;
+            border-color: #1E9B83;
+        }
+        .overlay {
+            display: none;
+        }
+        @media (max-width:1100px) {
+            .summary-grid {
+                grid-template-columns: repeat(2,1fr);
+            }
+        }
+        @media (max-width:800px) {
+            .sidebar {
+                left: -260px;
+                transition: 0.3s;
+            }
+            .sidebar.show {
+                left: 0;
+            }
+            .main {
+                margin-left: 0;
+                padding: 15px;
+            }
+            .mobile-menu {
+                display: block;
+            }
+            .overlay.show {
+                display: block;
+                position: fixed;
+                inset: 0;
+                background: rgba(0,0,0,0.6);
+                z-index: 900;
+            }
+            .dashboard-grid,
+            .analytics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width:550px) {
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+            .welcome h1 {
+                font-size: 23px;
+            }
+            .profile span {
+                display: none;
+            }
+            .top-right {
+                gap: 7px;
+            }
+            .pie-section {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+    <aside class="sidebar" id="sidebar">
+        <div class="logo-section">
+            <img src="logo.png" alt="Budget Planner">
+            <h2>Budget Planner</h2>
+        </div>
+        <div class="nav-item">
+            <a href="dashboard.html" class="nav-link active">
+                <span class="nav-left">🏠 Dashboard</span>
+            </a>
+        </div>
+        <div class="nav-item">
+            <button class="nav-link" onclick="toggleDropdown(this)">
+                <span class="nav-left">💰 Financial Management</span>
+                <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown">
+                <a href="#">Income Management</a>
+                <a href="#">Expense Management</a>
+                <a href="#">Expense Categories</a>
+                <a href="#">Transaction History</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-link" onclick="toggleDropdown(this)">
+                <span class="nav-left">🎯 Budget & Savings</span>
+                <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown">
+                <a href="#">Monthly Budget</a>
+                <a href="#">Category Budget</a>
+                <a href="#">Savings Goals</a>
+                <a href="#">Overspending Alerts</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-link" onclick="toggleDropdown(this)">
+                <span class="nav-left">📊 Analytics & Reporting</span>
+                <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown">
+                <a href="#">Expense Analysis</a>
+                <a href="#">Spending Trends</a>
+                <a href="#">Savings Progress</a>
+                <a href="#">Monthly Summary</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a href="#" class="nav-link">
+                <span class="nav-left">👤 Profile</span>
+            </a>
+        </div>
+        <div class="nav-item logout">
+            <button class="nav-link" onclick="logout()">
+                <span class="nav-left">🚪 Logout</span>
+            </button>
+        </div>
+    </aside>
+    <main class="main">
+        <div class="topbar">
+            <button class="mobile-menu" onclick="toggleSidebar()">☰</button>
+            <div></div>
+            <div class="top-right">
+                <div class="notification">🔔</div>
+                <div class="profile">
+                    <div class="profile-icon" id="profileInitial">H</div>
+                    <span id="profileName">Profile</span>
+                </div>
+            </div>
+        </div>
+        <section class="welcome">
+            <h1>Welcome, <span id="userName">User</span> 👋</h1>
+            <p>Here's an overview of your finances.</p>
+        </section>
+        <section class="summary-grid">
+            <div class="summary-card">
+                <div class="summary-top">
+                    <span class="summary-title">Total Income</span>
+                    <span class="summary-icon">💰</span>
+                </div>
+                <h2>₹45,000</h2>
+                <p>↑ 12% from last month</p>
+            </div>
+            <div class="summary-card">
+                <div class="summary-top">
+                    <span class="summary-title">Total Expenses</span>
+                    <span class="summary-icon">💸</span>
+                </div>
+                <h2>₹28,500</h2>
+                <p>↓ 8% from last month</p>
+            </div>
+            <div class="summary-card">
+                <div class="summary-top">
+                    <span class="summary-title">Available Balance</span>
+                    <span class="summary-icon">💳</span>
+                </div>
+                <h2>₹16,500</h2>
+                <p>Healthy balance</p>
+            </div>
+            <div class="summary-card">
+                <div class="summary-top">
+                    <span class="summary-title">Savings Progress</span>
+                    <span class="summary-icon">🎯</span>
+                </div>
+                <h2>67%</h2>
+                <p>Goal progress</p>
+            </div>
+        </section>
+        <section class="analytics-grid">
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3>Expense Distribution</h3>
+                    <a href="#">View Details</a>
+                </div>
+                <div class="pie-section">
+                    <div class="pie-chart">
+                        <div class="pie-center">
+                            <strong>₹28.5K</strong>
+                            <span>Total Expenses</span>
+                        </div>
+                    </div>
+                    <div class="legend">
+                        <div class="legend-item"><span class="dot dot-food"></span>Food ₹6,000</div>
+                        <div class="legend-item"><span class="dot dot-transport"></span>Transport ₹3,500</div>
+                        <div class="legend-item"><span class="dot dot-shopping"></span>Shopping ₹5,000</div>
+                        <div class="legend-item"><span class="dot dot-education"></span>Education ₹4,000</div>
+                        <div class="legend-item"><span class="dot dot-bills"></span>Bills ₹6,000</div>
+                        <div class="legend-item"><span class="dot dot-other"></span>Others ₹4,000</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3>Monthly Budget</h3>
+                    <a href="#">View Details</a>
+                </div>
+                <div class="budget-amount">
+                    <strong>₹28,500</strong>
+                    <span>of ₹45,000</span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar"></div>
+                </div>
+                <div class="budget-info">
+                    <span>63% used</span>
+                    <span>₹16,500 remaining</span>
+                </div>
+                <div class="goal" style="margin-top:22px;">
+                    <div class="goal-top">
+                        <span>Monthly Savings Target</span>
+                        <strong>67%</strong>
+                    </div>
+                    <div class="goal-progress">
+                        <div class="goal-bar" style="width:67%;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="dashboard-grid">
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3>Savings Goals</h3>
+                    <a href="#">View All</a>
+                </div>
+                <div class="goal">
+                    <div class="goal-top">
+                        <span>💻 Laptop</span>
+                        <strong>67%</strong>
+                    </div>
+                    <div class="goal-progress">
+                        <div class="goal-bar" style="width:67%;"></div>
+                    </div>
+                </div>
+                <div class="goal">
+                    <div class="goal-top">
+                        <span>🛡️ Emergency Fund</span>
+                        <strong>35%</strong>
+                    </div>
+                    <div class="goal-progress">
+                        <div class="goal-bar" style="width:35%;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3>Quick Actions</h3>
+                </div>
+                <div class="quick-actions">
+                    <button class="action-btn" onclick="addTransaction()">➕ Add Transaction</button>
+                    <button class="action-btn" onclick="setBudget()">💰 Set Budget</button>
+                    <button class="action-btn" onclick="addGoal()">🎯 Add Goal</button>
+                    <button class="action-btn" onclick="viewReports()">📊 View Reports</button>
+                </div>
+            </div>
+        </section>
+        <section class="dashboard-card">
+            <div class="card-header">
+                <h3>Recent Transactions</h3>
+                <a href="#">View All</a>
+            </div>
+            <div class="transaction">
+                <div class="transaction-left">
+                    <div class="transaction-icon">🍔</div>
+                    <div>
+                        <div class="transaction-name">Food</div>
+                        <div class="transaction-date">Today</div>
+                    </div>
+                </div>
+                <span class="expense">-₹320</span>
+            </div>
+            <div class="transaction">
+                <div class="transaction-left">
+                    <div class="transaction-icon">🚌</div>
+                    <div>
+                        <div class="transaction-name">Transport</div>
+                        <div class="transaction-date">Yesterday</div>
+                    </div>
+                </div>
+                <span class="expense">-₹500</span>
+            </div>
+            <div class="transaction">
+                <div class="transaction-left">
+                    <div class="transaction-icon">💼</div>
+                    <div>
+                        <div class="transaction-name">Freelance Income</div>
+                        <div class="transaction-date">22 Sep 2026</div>
+                    </div>
+                </div>
+                <span class="income">+₹5,000</span>
+            </div>
+            <div class="transaction">
+                <div class="transaction-left">
+                    <div class="transaction-icon">🛍️</div>
+                    <div>
+                        <div class="transaction-name">Shopping</div>
+                        <div class="transaction-date">20 Sep 2026</div>
+                    </div>
+                </div>
+                <span class="expense">-₹1,250</span>
+            </div>
+        </section>
+    </main>
+    <script>
+        let storedUser = localStorage.getItem("user");
+        if (storedUser) {
+            let user = JSON.parse(storedUser);
+            if (user.name) {
+                document.getElementById("userName").innerText = user.name;
+                document.getElementById("profileName").innerText = user.name;
+                document.getElementById("profileInitial").innerText = user.name.charAt(0).toUpperCase();
+            }
+        }
+        function toggleSidebar() {
+            document.getElementById("sidebar").classList.toggle("show");
+            document.getElementById("overlay").classList.toggle("show");
+        }
+        function closeSidebar() {
+            document.getElementById("sidebar").classList.remove("show");
+            document.getElementById("overlay").classList.remove("show");
+        }
+        function toggleDropdown(button) {
+            button.parentElement.classList.toggle("open");
+        }
+        function logout() {
+            localStorage.removeItem("user");
+            window.location.href = "loginpage.html";
+        }
+        function addTransaction() {
+            alert("Add Transaction page will open here.");
+        }
+        function setBudget() {
+            alert("Set Budget page will open here.");
+        }
+        function addGoal() {
+            alert("Savings Goal page will open here.");
+        }
+        function viewReports() {
+            alert("Reports page will open here.");
+        }
+    </script>
+</body>
+</html>
